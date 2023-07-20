@@ -18,10 +18,10 @@ def parse_line(line):
 
 def print_metrics(total_size, status_counts):
     """print computed metrics"""
-    print(f"File size: {total_size}")
+    print("File size: {}".format(total_size))
     for status_code, count in sorted(status_counts.items()):
         if count > 0:
-            print(f"{status_code}: {count}")
+            print("{}: {}".format(status_code, count))
 
 
 def process_input():
