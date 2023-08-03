@@ -55,7 +55,7 @@ def print_solutions(solutions):
         sys.stdout.write("\n")
 
 
-if __name__ == "__main__":
+def check_arguments():
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
@@ -70,5 +70,10 @@ if __name__ == "__main__":
         print("N must be at least 4")
         sys.exit(1)
 
+    return N
+
+
+if __name__ == "__main__":
+    N = check_arguments()
     solutions = solve_nqueens(N)
     print_solutions(solutions)
