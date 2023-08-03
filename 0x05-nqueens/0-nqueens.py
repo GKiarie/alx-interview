@@ -49,11 +49,13 @@ def solve_nqueens(N):
 
 
 def print_solutions(solutions):
-    for solution in sorted(solutions):
-        for row, col in solution:
-            sys.stdout.write(f"[{row}, {col}] ")
-        sys.stdout.write("\n")
-
+    for solution in sorted(solutions, key=lambda x: [row for row, col in x]):
+        sys.stdout.write("[")
+        for i in range(len(solution)):
+            sys.stdout.write(f"[{solution[i][0]}, {solution[i][1]}]")
+            if i != len(solution) - 1:
+                sys.stdout.write(", ")
+        sys.stdout.write("]\n")
 
 def check_arguments():
     if len(sys.argv) != 2:
@@ -76,4 +78,5 @@ def check_arguments():
 if __name__ == "__main__":
     N = check_arguments()
     solutions = solve_nqueens(N)
+    solutions.sort(key=lambda x: x[0][1])
     print_solutions(solutions)
