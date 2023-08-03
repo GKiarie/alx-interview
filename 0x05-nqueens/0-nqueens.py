@@ -57,6 +57,7 @@ def print_solutions(solutions):
                 sys.stdout.write(", ")
         sys.stdout.write("]\n")
 
+
 def check_arguments():
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
