@@ -10,7 +10,7 @@ if (!movieId) {
   process.exit(1);
 }
 
-const apiUrl = `https://swapi.dev/api/films/${movieId}/`;
+const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
 
 // Fetch movie data from the Star Wars API
 request(apiUrl, (error, response, movieData) => {
