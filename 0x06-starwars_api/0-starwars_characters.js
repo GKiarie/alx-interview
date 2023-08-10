@@ -10,30 +10,40 @@ if (!movieId) {
   process.exit(1);
 }
 
-const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
+const apiUrl = `https://swapi.dev/api/films/${movieId}/`;
+
+// Function to fetch character data for a given URL
+const fetchCharacter = characterUrl => {
+  return new Promise((resolve, reject) => {
+    request(characterUrl, (error, response, characterData) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+
+      const character = JSON.parse(characterData);
+      resolve(character.name);
+    });
+  });
+};
 
 // Fetch movie data from the Star Wars API
-request(apiUrl, (error, response, movieData) => {
+request(apiUrl, async (error, response, movieData) => {
   if (error) {
     console.error(`Error fetching movie: ${error.message}`);
     return;
   }
 
-  // Parse the JSON movie data
   const movie = JSON.parse(movieData);
   const characters = movie.characters;
 
-  // Loop through character URLs and fetch character data
-  characters.forEach(characterUrl => {
-    request(characterUrl, (error, response, characterData) => {
-      if (error) {
-        console.error(`Error fetching character: ${error.message}`);
-        return;
-      }
-
-      // Parse the JSON character data
-      const character = JSON.parse(characterData);
-      console.log(character.name);
-    });
-  });
+  // Fetch and print character names in order using async/await
+  for (const characterUrl of characters) {
+    try {
+      const characterName = await fetchCharacter(characterUrl);
+      console.log(characterName);
+    } catch (error) {
+      console.error(`Error fetching character: ${error.message}`);
+    }
+  }
 });
