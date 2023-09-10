@@ -18,7 +18,7 @@ def isWinner(x, nums):
             if not dp[i] and is_prime(i):
                 for j in range(i, n + 1, i):
                     dp[j] = True
-        return "Maria" if dp[n] else "Ben"
+        return "Ben" if dp[n] else "Maria"
 
     maria_wins = 0
     ben_wins = 0
